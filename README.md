@@ -2,7 +2,7 @@
 
 ## usage
 
-Clone from GitHub
+Clone from GitHub.
 
 `git clone https://github.com/UNILORN/python-optimcios`
 
@@ -35,4 +35,36 @@ print(mes)
 
 ```
 
+## Development
 
+### Required
+
+```
+
+Python >= 3.6.0
+pip >= 10.0.1
+npm >= 3.10.10
+
+```
+
+**※Caution**
+
+`wscat` It will automatically be installed globally.
+
+### It work
+
+Please install with the following command.
+
+```bash
+
+$ make inst-dev
+
+```
+
+Please execute the following command while working
+
+```bash
+
+$ make dev
+
+```
