@@ -13,12 +13,12 @@ with open('LICENSE') as f:
 
 setup(
     name='python_optimcios',
-    version='0.0.2',
+    version='0.0.3',
     description='Sample package for Python-Guide.org',
     long_description=readme,
     author='Yusuke Aoki',
     author_email='yuoyun6427.yuniron.komoron@gmail.com',
-    install_requires=['numpy', 'websocket-client'],
+    install_requires=['numpy>=1.9.0', 'websocket-client'],
     url='https://github.com/UNILORN/python-optimcios',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))

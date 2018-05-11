@@ -6,9 +6,8 @@ class messaging:
         self.url = url
         self.channel = channel_id
         self.token = access_token
-        self.ws = 0
 
-    def connection(self)->bool:
+    def connection(self) -> bool:
         try:
             ws_url = self.url + "?" + "channel_id=" + self.channel + "&access_token=" + self.token
             self.ws = create_connection(ws_url)
@@ -18,7 +17,7 @@ class messaging:
             print(err)
             return False
 
-    def sendMessage(self, message)->bool:
+    def sendMessage(self, message) -> bool:
         try:
             self.ws.send(message)
             return True
@@ -28,7 +27,7 @@ class messaging:
             self.ws.close()
             return False
 
-    def receiveMessage(self)->str:
+    def receiveMessage(self) -> str:
         try:
             text = self.ws.recv()
             return text
@@ -37,5 +36,3 @@ class messaging:
             print(err)
             self.ws.close()
             return ""
-
-
