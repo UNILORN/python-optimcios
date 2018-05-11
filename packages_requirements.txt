@@ -1,0 +1,5 @@
+numpy==1.13.2
+pylint==1.7.2
+python-dotenv==0.7.1
+websocket-client==0.47.0
+
