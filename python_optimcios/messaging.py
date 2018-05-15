@@ -3,9 +3,13 @@ from websocket import create_connection
 
 class messaging:
     def __init__(self, url, channel_id, access_token):
-        self.url = url
-        self.channel = channel_id
-        self.token = access_token
+        try:
+            self.url = url
+            self.channel = channel_id
+            self.token = access_token
+        except Exception as err:
+            print("[ ERROR ] Read Value Error")
+            print(err)
 
     def connection(self) -> bool:
         try:
