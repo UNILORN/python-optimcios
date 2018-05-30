@@ -1,8 +1,8 @@
 from websocket import create_connection
-
+import time
 
 class messaging:
-    def __init__(self, url, channel_id, access_token, count=10):
+    def __init__(self, url, channel_id, access_token, count=3):
         try:
             self.url = url
             self.channel = channel_id
@@ -25,7 +25,7 @@ class messaging:
         except Exception as err:
             print("[ ERROR ] CIOS Messaging Connection Error")
             print(err)
-            res = self.__reconnection()
+            res = self.__reconnection(log=log)
             return res
 
     def sendMessage(self, message, log=False) -> bool:
@@ -38,7 +38,7 @@ class messaging:
             print("[ ERROR ] CIOS Messaging Send Error")
             print(err)
             self.ws.close()
-            res = self.__reconnection()
+            res = self.__reconnection(log=log)
             return False
 
     def receiveMessage(self) -> str:
@@ -53,13 +53,18 @@ class messaging:
 
     def __reconnection(self, log=False) -> bool:
         try:
+            time.sleep(2)
             ws_url = self.url + "?" + "channel_id=" + self.channel + "&access_token=" + self.token
             if log:
+                print("[ LOG ] Reconnection WebSocket")
                 print("[ LOG ] Connection URL:" + ws_url)
             self.ws = create_connection(ws_url)
             self.connectionCount = self.connectionCountDefine
             return True
         except Exception as err:
+            if log:
+                print("[ ERROR ] Reconnect False")
+                print("[ ERROR ] Connection Count :" + str(self.connectionCount))
             self.connectionCount -= 1
             res = False
             if self.connectionCount > 0:
