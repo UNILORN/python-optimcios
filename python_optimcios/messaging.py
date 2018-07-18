@@ -1,6 +1,7 @@
 from websocket import create_connection
 import time
 
+
 class messaging:
     def __init__(self, url, channel_id, access_token, count=3):
         try:
@@ -74,3 +75,13 @@ class messaging:
                 exit()
             return res
 
+    def __log(self, text="", log=False, e=False) -> bool:
+        try:
+            if e:
+                print("[ ERROR ] "+text)
+            elif log:
+                print("[ LOG ] "+text)
+            else:
+                pass
+        except:
+            pass
