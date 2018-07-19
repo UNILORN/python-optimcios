@@ -6,9 +6,12 @@ import time
 
 
 class Messaging:
-    def __init__(self, client_id="", client_secret="", channel_id="", log=False):
+    def __init__(self, client_id="", client_secret="", channel_id="", log=False, cnt=3):
+
         self.__consoleLog("Create Messaging Instance")
         self.__consoleLog("Set Parameters")
+
+        # Data
         self.client_id = client_id
         self.client_secret = client_secret
         self.access_token = ""
@@ -16,6 +19,10 @@ class Messaging:
         self.cios_url = "wss://api.optim.cloud/v2/messaging"
         self.log = log
         print("Log " + str(log))
+
+        # Class Field
+        self.ws = ""
+        self.connectionCountDefine = self.connectionCount = cnt
 
     def OAuth(self) -> bool:
         req = {
@@ -39,7 +46,61 @@ class Messaging:
         return True
 
     def connection(self) -> bool:
-        pass
+        try:
+            ws_url = self.cios_url + "?" + "channel_id=" + self.channel_id + "&access_token=" + self.access_token
+            self.__consoleLog("Connection URL:" + ws_url)
+            self.ws = create_connection(ws_url)
+            return True
+        except Exception as err:
+            self.__consoleLog("CIOS Messaging Connection Error", True)
+            self.__consoleLog(err, True)
+            res = self.__reconnection()
+            return res
+
+    def sendMessage(self, message) -> bool:
+        try:
+            self.__consoleLog("Send Message:" + message)
+            self.ws.send(message)
+            return True
+        except Exception as err:
+            self.__consoleLog("CIOS Messaging Send Error", True)
+            self.__consoleLog(str(err), True)
+            self.ws.close()
+            res = self.__reconnection
+            return res
+
+    def receiveMessage(self) -> str:
+        try:
+            text = self.ws.recv()
+            return text
+        except Exception as err:
+            self.__consoleLog("CIOS Messaging Receive Error", True)
+            self.__consoleLog(str(err), True)
+            self.ws.close()
+            return ""
+
+    def __reconnection(self) -> bool:
+        try:
+            time.sleep(2)
+            ws_url = self.cios_url + "?" + "channel_id=" + self.channel_id + "&access_token=" + self.access_token
+            self.__consoleLog("Reconnection WebSocket")
+            self.__consoleLog("Connection URL:" + ws_url)
+            self.ws = create_connection(ws_url)
+            self.connectionCount = self.connectionCountDefine
+            return True
+
+        except Exception as err:
+            self.__consoleLog("Reconnect False", True)
+            self.__consoleLog(str(err), True)
+            self.__consoleLog("Connection Count :" + str(self.connectionCount), True)
+            self.connectionCount -= 1
+            res = False
+            if self.connectionCount > 0:
+                res = self.__reconnection
+            else:
+                self.__consoleLog("Reconnect False")
+                exit()
+            return res
 
     def __consoleLog(self, t, e=False) -> bool:
         if e:
@@ -48,3 +109,4 @@ class Messaging:
             print("[ LOG ] " + t)
         else:
             pass
+        return True
