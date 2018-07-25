@@ -16,21 +16,47 @@ $ make
 ```
 
 
-## Sample Codes
+## CIOSv1 Sample Codes
 
 ```python
 
-from python_optimcios import messaging
+from python_optimcios.v1 import messaging
 
 channel_id = ""
 access_token = ""
-cios = messaging.messaging('ws://0.0.0.0:9999',channel_id,access_token)
+cios = messaging.Messaging('ws://0.0.0.0:9999',channel_id,access_token)
 
 cios.connection()
 
 cios.sendMessage('Hello world')
 
 mes = cios.receiveMessage()
+print(mes)
+
+```
+
+## CIOSv2 Sample Codes
+
+```python
+
+from python_optimcios.v2 import messaging
+
+client_id = ""
+client_secret = ""
+channel_id = ""
+log = True
+Reconnect_count = 5
+
+cios = messaging.Messaging(client_id=client_id,client_secret=client_secret,channel_id=channel_id,log=log,cnt=Reconnect_count)
+
+OAuth_res = cios.OAuth() # True,False
+
+connect_res = cios.connection() # True,False
+
+send_res = cios.sendMessage('Hello world') # True,False
+
+mes = cios.receiveMessage() # String
+
 print(mes)
 
 ```
