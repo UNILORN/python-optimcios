@@ -2,7 +2,7 @@ from websocket import create_connection
 import time
 
 
-class messaging:
+class Messaging:
     def __init__(self, url, channel_id, access_token, count=3):
         try:
             self.url = url
