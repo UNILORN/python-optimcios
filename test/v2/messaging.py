@@ -21,3 +21,8 @@ class TestMessaging(unittest.TestCase):
         self.ob.OAuth()
         r = self.ob.connection()
         self.assertEqual(r, True)
+
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTests(unittest.makeSuite(TestMessaging))
+    return suite
