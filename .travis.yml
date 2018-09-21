@@ -1,14 +1,10 @@
 language: python
 
 python:
-  - 3.3
-  - 3.4
+  - 3.7
 
 install:
-  - websocket-client==0.47.0
-  - python-dotenv==0.7.1
-  - pylint==1.7.2
-  - numpy==1.13.2
+  - pip install -r packages_requirements.txt
 
 script:
     - python setup.py test
