@@ -16,7 +16,7 @@ $ make
 ```
 
 
-## CIOSv1 Sample Codes
+## CIOSv1 Sample Codes In Messaging
 
 ```python
 
@@ -37,29 +37,31 @@ print(mes)
 
 ## CIOSv2 Sample Codes
 
+### Authorization
+
 ```python
 
-from python_optimcios.v2 import messaging
+from python_optimcios.v2 import authorization
 
-client_id = ""
-client_secret = ""
-channel_id = ""
-log = True
-Reconnect_count = 5
+auth = authorization.Authorization(
+            auth_uri="AUTH_URI",
+            client_id="CLIENT_ID",
+            client_secret="CLIENT_SECRET",
+            log=True
+        )
+scope = ""
 
-cios = messaging.Messaging(client_id=client_id,client_secret=client_secret,channel_id=channel_id,log=log,cnt=Reconnect_count)
+access_token = auth.getRefreshAccessToken(
+    scope=scope,
+    refresh_token="REFRESH_TOKEN"
+)
 
-OAuth_res = cios.OAuth() # True,False
-
-connect_res = cios.connection() # True,False
-
-send_res = cios.sendMessage('Hello world') # True,False
-
-mes = cios.receiveMessage() # String
-
-print(mes)
-
+print(access_token)
 ```
+
+### Messaging
+
+`In Development`
 
 ## Development
 
