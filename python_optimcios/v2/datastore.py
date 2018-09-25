@@ -1,5 +1,4 @@
 import requests
-import json
 
 
 class Datastore:
@@ -21,5 +20,23 @@ class Datastore:
             params=params,
             headers=self.headers
         )
+        return self.__toJson(res)
 
-        return res.json()
+    def getChannel(self, channel_id="", params=None):
+        if params is None:
+            params = {}
+
+        res = requests.get(
+            url=self.api_url + "/channels/" + channel_id,
+            params=params,
+            headers=self.headers
+        )
+        return self.__toJson(res)
+
+    def __toJson(self,res):
+        if res.status_code == 200:
+            return res.json()
+        if "errors" in res.json():
+            return res.json()
+        else:
+            return {"errors":[res.json()]}

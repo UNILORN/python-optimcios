@@ -33,11 +33,11 @@ class TestDatastore(unittest.TestCase):
         r = self.datastore.getListChannel()
         self.assertFalse("errors" in r)
 
-    @unittest.skip("")
     def test_getChannel(self):
-        pass
+        r = self.datastore.getChannel(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"))
+        self.assertFalse("errors" in r)
 
-    @unittest.skip("")
+    @unittest.skip("Delete Channel Skip")
     def test_deleteChannel(self):
         pass
 
