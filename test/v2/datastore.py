@@ -28,7 +28,8 @@ class TestDatastore(unittest.TestCase):
         )
 
     def test_getListChannel(self):
-        pass
+        r = self.datastore.getListChannel()
+        self.assertFalse("errors" in r)
 
     def test_getChannel(self):
         pass
