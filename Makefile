@@ -3,7 +3,7 @@ install:
 
 inst-dev:
 	pip3 install -r packages_requirements.txt
-	npm install -g wscat
+	cp -n .env.example .env
 
 dev:
 	wscat -l 9999
