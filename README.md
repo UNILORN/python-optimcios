@@ -40,7 +40,6 @@ print(mes)
 ### Authorization
 
 ```python
-
 from python_optimcios.v2 import authorization
 
 auth = authorization.Authorization(
@@ -49,19 +48,52 @@ auth = authorization.Authorization(
             client_secret="CLIENT_SECRET",
             log=True
         )
-scope = ""
 
 access_token = auth.getRefreshAccessToken(
-    scope=scope,
+    scope="SCOPE",
     refresh_token="REFRESH_TOKEN"
 )
 
 print(access_token)
 ```
 
+### Datastore
+
+```python
+from python_optimcios.v2 import authorization, datastore
+
+auth = authorization.Authorization(
+            auth_uri="AUTH_URI",
+            client_id="CLIENT_ID",
+            client_secret="CLIENT_SECRET",
+            log=True
+        )
+access_token = auth.getRefreshAccessToken(
+    scope="SCOPE",
+    refresh_token="REFRESH_TOKEN"
+)
+
+datastore = datastore.Datastore(
+            access_token=access_token,
+            api_uri="API_URI",
+            log=True
+        )
+
+# Datastore Channel List
+datastore.getListChannel()
+
+# Datastore Channel Info
+datastore.getChannel(channel_id="CHANNEL_ID")
+
+# Datastore Object List
+datastore.getListObjects(channel_id="CHANNEL_ID")
+
+```
+
 ### Messaging
 
 `In Development`
+
 
 ## Development
 
@@ -71,28 +103,23 @@ print(access_token)
 
 Python >= 3.6.0
 pip >= 10.0.1
-npm >= 3.10.10
 
 ```
-
-**※Caution**
-
-`wscat` It will automatically be installed globally.
 
 ### It work
 
-Please install with the following command.
+1. Please install with the following command.
 
-```bash
+    ```bash
+    
+    $ make inst-dev
+    
+    ```
 
-$ make inst-dev
+2. Change the .env file
 
-```
+3. Run the test and make sure there are no errors
 
-Please execute the following command while working
-
-```bash
-
-$ make dev
-
-```
+    ```bash
+    $ python3 setup.py test
+    ```
