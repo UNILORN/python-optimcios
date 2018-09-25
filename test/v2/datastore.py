@@ -27,6 +27,30 @@ class TestDatastore(unittest.TestCase):
             log=True
         )
 
+    def test_getListChannel(self):
+        pass
+
+    def test_getChannel(self):
+        pass
+
+    def test_deleteChannel(self):
+        pass
+
+    def test_getListObjects(self):
+        pass
+
+    def test_getObject(self):
+        pass
+
+    def test_createObject(self):
+        pass
+
+    def test_deleteObject(self):
+        pass
+
+    def test_getLatestObject(self):
+        pass
+
 
 
 
