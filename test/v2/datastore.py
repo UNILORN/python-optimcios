@@ -43,7 +43,8 @@ class TestDatastore(unittest.TestCase):
 
     @unittest.skip("")
     def test_getListObjects(self):
-        pass
+        r = self.datastore.getListObjects(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"))
+        self.assertFalse("errors" in r)
 
     @unittest.skip("")
     def test_getObject(self):
