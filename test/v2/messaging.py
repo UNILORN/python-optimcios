@@ -29,7 +29,7 @@ class TestMessaging(unittest.TestCase):
             log = True
         )
 
-    @unittest.skip("showing class skipping")
+    @unittest.skip("Messaging Channel None")
     def test_WSConnection(self):
         r = self.messaging.connection()
         self.assertEqual(r, True)
