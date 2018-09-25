@@ -1,6 +1,8 @@
 import unittest
 import os
 from os.path import dirname, abspath
+from pprint import pprint
+
 from dotenv import load_dotenv
 from python_optimcios.v2 import authorization, datastore
 
@@ -31,24 +33,31 @@ class TestDatastore(unittest.TestCase):
         r = self.datastore.getListChannel()
         self.assertFalse("errors" in r)
 
+    @unittest.skip("")
     def test_getChannel(self):
         pass
 
+    @unittest.skip("")
     def test_deleteChannel(self):
         pass
 
+    @unittest.skip("")
     def test_getListObjects(self):
         pass
 
+    @unittest.skip("")
     def test_getObject(self):
         pass
 
+    @unittest.skip("")
     def test_createObject(self):
         pass
 
+    @unittest.skip("")
     def test_deleteObject(self):
         pass
 
+    @unittest.skip("")
     def test_getLatestObject(self):
         pass
 
