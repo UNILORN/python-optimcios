@@ -23,8 +23,10 @@ class TestDatastore(unittest.TestCase):
         )
         self.datastore = datastore.Datastore(
             access_token=access_token,
+            api_uri=os.environ.get("API_URI"),
             log=True
         )
+
 
 
 
