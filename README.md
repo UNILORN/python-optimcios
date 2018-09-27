@@ -1,6 +1,6 @@
-# Optim CIOS APIv1 Python Package
+# Optim CIOS APIv1,v2 Python Package
 
-## usage
+## Usage
 
 Clone from GitHub.
 
