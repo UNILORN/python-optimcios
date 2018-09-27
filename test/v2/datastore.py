@@ -46,9 +46,9 @@ class TestDatastore(unittest.TestCase):
         r = self.datastore.getListObjects(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"))
         self.assertFalse("errors" in r)
 
-    @unittest.skip("")
     def test_getObject(self):
-        pass
+        r = self.datastore.getObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),object_id=os.environ.get("DATASTORE_OBJECT_ID"))
+        self.assertFalse("errors" in r)
 
     def test_createObject(self):
         r = self.datastore.postObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),data=json.dumps({"message":"test"}))
