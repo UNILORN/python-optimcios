@@ -88,6 +88,18 @@ datastore.getChannel(channel_id="CHANNEL_ID")
 # Datastore Object List
 datastore.getListObjects(channel_id="CHANNEL_ID")
 
+# Datastore Create Object
+datastore.postObject(channel_id="CHANNEL_ID",data="POST_DATA_JSON")
+
+# Datastore Object Info
+datastore.getObject(channel_id="CHANNEL_ID",object_id="OBJECT_ID")
+
+# Datastore Latest Object Info
+datastore.getObject(channel_id="CHANNEL_ID")
+
+# Datasotre Delete Object
+datastore.deleteObject(channel_id="CHANNEL_ID",object_id="OBJECT_ID")
+
 ```
 
 ### Messaging
