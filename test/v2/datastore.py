@@ -58,9 +58,10 @@ class TestDatastore(unittest.TestCase):
     def test_deleteObject(self):
         pass
 
-    @unittest.skip("")
     def test_getLatestObject(self):
-        pass
+        r = self.datastore.getLatestObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"))
+        self.assertFalse("errors" in r)
+
 
 
 
