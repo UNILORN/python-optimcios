@@ -2,6 +2,7 @@ import unittest
 import os
 from os.path import dirname, abspath
 from pprint import pprint
+import json
 
 from dotenv import load_dotenv
 from python_optimcios.v2 import authorization, datastore
@@ -49,11 +50,11 @@ class TestDatastore(unittest.TestCase):
     def test_getObject(self):
         pass
 
-    @unittest.skip("")
     def test_createObject(self):
-        pass
+        r = self.datastore.postObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),data=json.dumps({"message":"test"}))
+        self.assertFalse("errors" in r)
 
-    @unittest.skip("")
+    @unittest.skip("Delete Object Skip")
     def test_deleteObject(self):
         pass
 
