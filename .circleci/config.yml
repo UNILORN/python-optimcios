@@ -13,7 +13,7 @@ jobs:
       - run:
           name: install dependencies
           command:
-            pip install --upgrade pip &&
+            pip install -U pip &&
             pip install -r packages_requirements.txt
       - save_cache: # special step to save dependency cache
           key: deps1-{{ .Branch }}-{{ checksum "packages_requirements.txt" }}
