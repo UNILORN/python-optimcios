@@ -1,25 +1,36 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/python:3.7.0
+#version: 2
+#jobs:
+#  build:
+#    docker:
+#      - image: circleci/python:3.7.0
+#
+#    working_directory: ~/repo
+#
+#    steps:
+#      - checkout
+#
+#      - run:
+#          name: install dependencies
+#          command:
+#            pip install --upgrade pip &&
+#            pip install -r packages_requirements.txt
+#
+#      - run:
+#          name: run tests
+#          command: python3 setup.py test
+#
+#      - store_artifacts:
+#          path: test-reports
+#          destination: test-reports
 
-    working_directory: ~/repo
+machine:
+  python:
+    version: 3.7.0
 
-    steps:
-      - checkout
+dependencies:
+  pre:
+    - pip install -U pip
 
-      - run:
-          name: install dependencies
-          command:
-            pip install --upgrade pip &&
-            pip install -r packages_requirements.txt
-
-      - run:
-          name: run tests
-          command: python3 setup.py test
-
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
-
+test:
+  post:
+    - cd [manage.py-directory]; python setup.py test
