@@ -16,7 +16,7 @@ with open('LICENSE') as f:
 
 setup(
     name='python_optimcios',
-    version='0.0.4',
+    version='0.1.0',
     description='Sample package for Python-Guide.org',
     long_description=readme,
     author='Yusuke Aoki',
