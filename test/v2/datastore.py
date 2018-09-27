@@ -47,22 +47,22 @@ class TestDatastore(unittest.TestCase):
         self.assertFalse("errors" in r)
 
     def test_getObject(self):
-        r = self.datastore.getObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),object_id=os.environ.get("DATASTORE_OBJECT_ID"))
+        r = self.datastore.getObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),
+                                     object_id=os.environ.get("DATASTORE_OBJECT_ID"))
         self.assertFalse("errors" in r)
 
     def test_createObject(self):
-        r = self.datastore.postObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),data=json.dumps({"message":"test"}))
+        r = self.datastore.postObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),
+                                      data=json.dumps({"message": "test"}))
         self.assertFalse("errors" in r)
 
-    @unittest.skip("Delete Object Skip")
     def test_deleteObject(self):
-        pass
+        t = self.datastore.postObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),
+                                      data=json.dumps({"message": "test"}))
+        r = self.datastore.deleteObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"),
+                                        object_id=str(t["object"]["id"]))
+        self.assertFalse("errors" in r)
 
     def test_getLatestObject(self):
         r = self.datastore.getLatestObject(channel_id=os.environ.get("DATASTORE_CHANNEL_ID"))
         self.assertFalse("errors" in r)
-
-
-
-
-

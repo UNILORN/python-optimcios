@@ -80,6 +80,17 @@ class Datastore:
         )
         return self.__toJson(res)
 
+    def deleteObject(self, channel_id="", object_id=""):
+
+        res = requests.delete(
+            url=self.api_url + "/channels/" + channel_id + "/objects/" + object_id,
+            headers=self.headers
+        )
+        if res.status_code == 200:
+            return {"status_code": res.status_code}
+        else:
+            return {"errors": [{"code": res.status_code}]}
+
     def __toJson(self, res):
         if res.status_code == 200:
             return res.json()
