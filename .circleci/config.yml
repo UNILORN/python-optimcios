@@ -1,36 +1,30 @@
-#version: 2
-#jobs:
-#  build:
-#    docker:
-#      - image: circleci/python:3.7.0
-#
-#    working_directory: ~/repo
-#
-#    steps:
-#      - checkout
-#
-#      - run:
-#          name: install dependencies
-#          command:
-#            pip install --upgrade pip &&
-#            pip install -r packages_requirements.txt
-#
-#      - run:
-#          name: run tests
-#          command: python3 setup.py test
-#
-#      - store_artifacts:
-#          path: test-reports
-#          destination: test-reports
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.0
 
-machine:
-  python:
-    version: 3.7.0
+    working_directory: ~/repo
 
-dependencies:
-  pre:
-    - pip install -U pip
+    steps:
+      - checkout
+      - restore_cache: # restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run
+          key: deps1-{{ .Branch }}-{{ checksum "packages_requirements.txt" }}
+      - run:
+          name: install dependencies
+          command:
+            pip install --upgrade pip &&
+            pip install -r packages_requirements.txt
+      - save_cache: # special step to save dependency cache
+          key: deps1-{{ .Branch }}-{{ checksum "packages_requirements.txt" }}
+          paths:
+            - "venv"
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            python3 setup.py test
 
-test:
-  post:
-    - cd [manage.py-directory]; python setup.py test
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
