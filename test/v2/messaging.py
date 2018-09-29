@@ -16,18 +16,30 @@ class TestMessaging(unittest.TestCase):
             client_secret=os.environ.get("CLIENT_SECRET"),
             log=False
         )
-        access_token = auth.getRefreshAccessToken(
+        self.access_token = auth.getRefreshAccessToken(
             scope=scope,
             refresh_token=os.environ.get("REFRESH_TOKEN")
         )
 
+    def test_WSConnection(self):
+        load_dotenv(find_dotenv())
         self.messaging = messaging.Messaging(
-            access_token=access_token,
+            access_token=self.access_token,
             channel_id=os.environ.get("MESSAGING_CHANNEL_ID"),
             api_uri=os.environ.get("API_URI"),
-            log = False
+            log=False
         )
-
-    def test_WSConnection(self):
         r = self.messaging.connection()
+        self.assertEqual(r, True)
+
+    def test_WSSend(self):
+        load_dotenv(find_dotenv())
+        self.messaging = messaging.Messaging(
+            access_token=self.access_token,
+            channel_id=os.environ.get("MESSAGING_CHANNEL_ID"),
+            api_uri=os.environ.get("API_URI"),
+            log=False
+        )
+        self.messaging.connection()
+        r = self.messaging.sendMessage('{"message":"Test Message"}')
         self.assertEqual(r, True)
