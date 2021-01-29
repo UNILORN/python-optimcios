@@ -14,7 +14,7 @@ class TestAuthorization(unittest.TestCase):
             auth_uri=os.environ.get("AUTH_URI"),
             client_id=os.environ.get("CLIENT_ID"),
             client_secret=os.environ.get("CLIENT_SECRET"),
-            log=True
+            log=False
         )
 
     def test_getAccessToken(self):

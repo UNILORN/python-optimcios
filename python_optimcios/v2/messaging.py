@@ -10,7 +10,6 @@ class Messaging:
         self.channel_id = channel_id
         self.api_url = "wss://" + api_uri + "/v2/messaging"
         self.log = log
-        print("Log " + str(log))
 
         # Class Field
         self.ws = ""
@@ -21,7 +20,7 @@ class Messaging:
 
     def connection(self) -> bool:
         try:
-            ws_url = self.api_url + "?" + "channel_id=" + self.channel_id + "&access_token=" + self.access_token
+            ws_url = self.api_url + "?" + "channel_id=" + self.channel_id + "&access_token=" + self.access_token + "&packer_format=json&mode=pubsub"
             self.__consoleLog("Connection URL:" + ws_url)
             self.ws = create_connection(ws_url)
             return True
